@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import AppMenuToggle from './components/AppMenuToggle'
 import './App.css'
+import HamburgerToggle from './components/HamburgerToggle'
 
 function App() {
   const [isAppMenuOpen, setIsAppMenuOpen] = useState(false)
