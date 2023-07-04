@@ -37,12 +37,6 @@ const SearchToggle = (
     to: { opacity: 1 }
   })
 
-  const closeBar = useSpring({
-    ...animationDefaults,
-    from: { opacity: 1 },
-    to: { opacity: 0 }
-  })
-
   const circle = useSpring({
     ...animationDefaults,
     from: { opacity: 0, transform: 'scale(0)', transformOrigin: 'center' },
