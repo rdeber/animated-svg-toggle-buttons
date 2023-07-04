@@ -12,7 +12,7 @@ interface AppMenuToggleProps {
 
 const Path = (props: any) => (
   <animated.path
-    fill='#0f0's
+    fill='#0f0'
     stroke='inherit'
     strokeLinecap='round'
     style={{ transformOrigin: 'center' }}

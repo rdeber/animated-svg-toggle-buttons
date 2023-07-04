@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useSpring, animated } from '@react-spring/web'
 
-interface ToggleXProps {
+interface HamburgerToggleProps {
   svgIconSize?: number
   svgIconWeight?: number
   svgXWeight?: number
@@ -21,7 +21,7 @@ const Path = (props: any) => (
 )
 
 const HamburgerToggle = (
-  props: ToggleXProps
+  props: HamburgerToggleProps
 ): React.ReactElement => {
   const animationDefaults = {
     reverse: props?.isOpen,
@@ -79,24 +79,6 @@ const HamburgerToggle = (
     }
   })
 
-
-
-  const dot = useSpring({
-    ...animationDefaults,
-    from: {
-      opacity: 0,
-      strokeWidth: 0,
-      transform: 'scale(0)',
-      transformOrigin: 'center'
-    },
-    to: {
-      opacity: 1,
-      strokeWidth: props?.svgIconWeight,
-      transform: 'scale(1)',
-      transformOrigin: 'center'
-    }
-  })
-
   const dotXLeft = useSpring({
     ...animationDefaults,
     from: {
@@ -132,7 +114,6 @@ const HamburgerToggle = (
       <Path d='M 10 15 L 40 15' {...topBar} />
       <Path d='M 10 25 L 40 25' {...middleBar} />
       <Path d='M 10 35 L 40 35' {...bottomBar} />
-
       <Path {...dotXLeft} />
       <Path {...dotXRight} />
     </svg>
