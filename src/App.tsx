@@ -1,33 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import AppMenuToggle from './components/AppMenuToggle'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAppMenuOpen, setIsAppMenuOpen] = useState(false)
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
+
+  function toggleAppMenu() {
+    setIsAppMenuOpen(!isAppMenuOpen)
+  }
+
+  function toggleHamburger() {
+    setIsHamburgerOpen(!isHamburgerOpen)
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AppMenuToggle
+        svgIconSize={150}
+        svgIconWeight={5}
+        svgXWeight={4}
+        isOpen={isAppMenuOpen}
+        onClick={toggleAppMenu}
+      />
+      <HamburgerToggle
+        svgIconSize={150}
+        svgIconWeight={4}
+        svgXWeight={4}
+        isOpen={isHamburgerOpen}
+        onClick={toggleHamburger}
+      />
     </>
   )
 }
