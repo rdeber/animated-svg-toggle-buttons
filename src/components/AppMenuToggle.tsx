@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useSpring, animated } from '@react-spring/web'
+import { useSpring, animated, SpringValue } from '@react-spring/web'
 
 interface AppMenuToggleProps {
   svgIconSize?: number
@@ -10,11 +10,20 @@ interface AppMenuToggleProps {
   onClick?: () => void
 }
 
-const Path = (props: any) => (
+interface PathProps {
+  d: SpringValue<string>
+  style: {
+    opacity: SpringValue<number>
+    strokeWidth: SpringValue<number>
+    transform: SpringValue<string>
+    transformOrigin: SpringValue<string>
+  }
+}
+
+const Path = (props: PathProps) => (
   <animated.path
     stroke='inherit'
     strokeLinecap='round'
-    style={{ transformOrigin: 'center' }}
     {...props}
   />
 )
@@ -25,7 +34,7 @@ const AppMenuToggle = ({
   svgXWeight = 2,
   svgColor = '#000',
   isOpen = false,
-  onClick = () => {console.log('clicked')},
+  onClick = () => {},
 }: AppMenuToggleProps): React.ReactElement => {
   const animationDefaults = {
     reverse: isOpen,
@@ -88,7 +97,7 @@ const AppMenuToggle = ({
       viewBox='0 0 50 50'
     >
       {coordinates.map((coordinate, i) => (
-        <Path key={i} style={dot} d={`M ${coordinate} L ${coordinate}`} />
+        <Path key={i} style={dot} d={dot.transform.interpolate(value => `M ${coordinate} L ${coordinate}`)} />
       ))}
       <Path {...dotXLeft} />
       <Path {...dotXRight} />
