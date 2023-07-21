@@ -10,29 +10,28 @@ interface HamburgerToggleProps {
   onClick?: () => void
 }
 
-const Path = (props: any) => (
+interface PathProps {
+  d: string
+  style: object
+}
+
+const Path = ({d, style}: PathProps) => (
   <animated.path
-    fill='#0f0'
+    fill='none'
     stroke='inherit'
     strokeLinecap='round'
-    style={{ transformOrigin: 'center' }}
-    {...props}
+    d={d}
+    style={style}
   />
 )
 
-const HamburgerToggle = (
-  props: HamburgerToggleProps
-): React.ReactElement => {
-  const animationDefaults = {
-    reverse: props?.isOpen,
+const useBarAnimation = (isOpen: boolean, svgIconWeight: number) => {
+  return useSpring({
+    reverse: isOpen,
     config: {
       friction: 27,
       tension: 400
-    }
-  }
-
-  const topBar = useSpring({
-    ...animationDefaults,
+    },
     from: {
       opacity: 0,
       strokeWidth: 0,
@@ -41,49 +40,35 @@ const HamburgerToggle = (
     },
     to: {
       opacity: 1,
-      strokeWidth: props?.svgIconWeight,
+      strokeWidth: svgIconWeight,
       transform: 'scale(1)',
       transformOrigin: 'center'
     }
   })
+}
 
-  const middleBar = useSpring({
-    ...animationDefaults,
-    from: {
-      opacity: 0,
-      strokeWidth: 0,
-      transform: 'scale(0)',
-      transformOrigin: 'center'
-    },
-    to: {
-      opacity: 1,
-      strokeWidth: props?.svgIconWeight,
-      transform: 'scale(1)',
-      transformOrigin: 'center'
-    }
-  })
+const HamburgerToggle = ({
+  svgIconSize = 50,
+  svgIconWeight = 2,
+  svgXWeight = 2,
+  svgColor = '#000',
+  isOpen = false,
+  onClick = () => {}
+}: HamburgerToggleProps): React.ReactElement => {
 
-  const bottomBar = useSpring({
-    ...animationDefaults,
-    from: {
-      opacity: 0,
-      strokeWidth: 0,
-      transform: 'scale(0)',
-      transformOrigin: 'center'
-    },
-    to: {
-      opacity: 1,
-      strokeWidth: props?.svgIconWeight,
-      transform: 'scale(1)',
-      transformOrigin: 'center'
-    }
-  })
+  const topBar = useBarAnimation(isOpen, svgIconWeight)
+  const middleBar = useBarAnimation(isOpen, svgIconWeight)
+  const bottomBar = useBarAnimation(isOpen, svgIconWeight)
 
   const dotXLeft = useSpring({
-    ...animationDefaults,
+    reverse: isOpen,
+    config: {
+      friction: 27,
+      tension: 400
+    },
     from: {
       d: 'M 15 15 L 35 35',
-      strokeWidth: props?.svgXWeight
+      strokeWidth: svgXWeight
     },
     to: {
       d: 'M 25 25 L 25 25',
@@ -92,10 +77,14 @@ const HamburgerToggle = (
   })
 
   const dotXRight = useSpring({
-    ...animationDefaults,
+    reverse: isOpen,
+    config: {
+      friction: 27,
+      tension: 400
+    },
     from: {
       d: 'M 15 35 L 35 15',
-      strokeWidth: props?.svgXWeight
+      strokeWidth: svgXWeight
     },
     to: {
       d: 'M 25 25 L 25 25',
@@ -105,17 +94,17 @@ const HamburgerToggle = (
 
   return (
     <svg
-      width={props?.svgIconSize}
-      height={props?.svgIconSize}
-      stroke={props?.svgColor}
-      onClick={props?.onClick}
+      width={svgIconSize}
+      height={svgIconSize}
+      stroke={svgColor}
+      onClick={onClick}
       viewBox='0 0 50 50'
     >
-      <Path d='M 10 15 L 40 15' {...topBar} />
-      <Path d='M 10 25 L 40 25' {...middleBar} />
-      <Path d='M 10 35 L 40 35' {...bottomBar} />
-      <Path {...dotXLeft} />
-      <Path {...dotXRight} />
+      <Path d='M 10 15 L 40 15' style={topBar} />
+      <Path d='M 10 25 L 40 25' style={middleBar} />
+      <Path d='M 10 35 L 40 35' style={bottomBar} />
+      <Path d='M 15 15 L 35 35' style={dotXLeft} />
+      <Path d='M 15 35 L 35 15' style={dotXRight} />
     </svg>
   )
 }
