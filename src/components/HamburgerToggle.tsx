@@ -53,7 +53,7 @@ const HamburgerToggle = ({
   svgXWeight = 2,
   svgColor = '#000',
   isOpen = false,
-  onClick = () => {}
+  onClick = () => {console.log("Clicked")}
 }: HamburgerToggleProps): React.ReactElement => {
 
   const topBar = useBarAnimation(isOpen, svgIconWeight)
