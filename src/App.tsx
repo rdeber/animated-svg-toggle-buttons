@@ -54,21 +54,21 @@ function App() {
         />
       </div>
       <AppMenuToggle
-        svgIconSize={150}
+        svgIconSize={200}
         svgIconWeight={iconWeight}
         svgXWeight={xWeight}
         isOpen={isAppMenuOpen}
         onClick={toggleAppMenu}
       />
       <HamburgerToggle
-        svgIconSize={150}
+        svgIconSize={200}
         svgIconWeight={iconWeight}
         svgXWeight={xWeight}
         isOpen={isHamburgerOpen}
         onClick={toggleHamburger}
       />
       <SearchToggle
-        svgIconSize={150}
+        svgIconSize={200}
         svgIconWeight={iconWeight}
         svgXWeight={xWeight}
         isOpen={isSearchOpen}
