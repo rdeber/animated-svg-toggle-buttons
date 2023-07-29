@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <label htmlFor="iconWeightInput">Icon Weight:</label>
         <input
           type="number"
@@ -52,7 +52,7 @@ function App() {
           value={xWeight}
           onChange={handleXWeightChange}
         />
-      </div>
+      </div> */}
       <AppMenuToggle
         svgIconSize={200}
         svgIconWeight={iconWeight}
